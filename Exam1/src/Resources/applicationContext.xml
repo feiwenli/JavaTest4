@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.99.100:3306/sakila"/>
+        <property name="username" value="root"/><property name="password" value="1234567"/>
+    </bean>
+
+    <aop:config>
+        <aop:aspect id="log" ref="logging">
+            <aop:pointcut id="selectAll" expression="execution(* com.hand.*.*(..))"/>
+            <aop:before pointcut-ref="selectAll" method="beforeAdvice"/>
+            <aop:after pointcut-ref="selectAll" method="afterAdvice"/>
+            <aop:after-returning pointcut-ref="selectAll" returning="retVal" method="afterReturningAdvice"/>
+            <aop:after-throwing pointcut-ref="selectAll" throwing="ex" method="AfterThrowingAdvice"/>
+        </aop:aspect>
+    </aop:config>
+    <!-- Definition for film bean -->
+    <bean id="film" class="com.hand.Film">
+        <property name="filmId" value="2"/>
+        <property name="title" value="11"/>
+        <property name="description" value="1111111111"/>
+        <property name="languageId" value="1"/>
+        <property name="originalLanguageId" value="4"/>
+        <property name="releaseYear" value="2017"/>
+        <property name="rentalDuration" value="9"/>
+    </bean>
+    <!-- Definition for logging aspect -->
+    <bean id="logging" class="com.hand.infra.config.Logging"/>
+</beans>

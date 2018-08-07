@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hand.infra.mapper.FilmMapper">
+
+    <!--
+    <resultMap id="filmRes" type="com.hand.Film">
+        <id column="film_id" jdbcType="int" property="filmId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="language_id" jdbcType="INT" property="languageId"/>
+        <result column="rental_duration" jdbcType="INT" property="rentalDuration"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="release_year" jdbcType="VARCHAR" property="releaseYear"/>
+        <result column="original_language_id" jdbcType="INT" property="originalLanguageId"/>
+    </resultMap>
+
+    -->
+    <insert id="insertOne" parameterType="com.hand.Film" useGeneratedKeys="true" keyProperty="film_id">
+        insert into film (title,language_id,rental_duration,
+        <if test="description != null and ! &quot;&quot;.equals(description.trim())
+and releaseYear !=null and ! &quot;&quot;.equals(releaseYear.trim())
+and originalLanguageId !=null and ! &quot;&quot;.equals(originalLanguageId.trim())">
+            description,release_year,original_language_id
+        </if>) value (#{title},#{languageId},#{rentalDuration},#{description},#{releaseYear},#{originalLanguageId})
+
+    </insert>
+
+
+</mapper>
