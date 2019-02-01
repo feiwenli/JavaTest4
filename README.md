@@ -26,7 +26,7 @@ stop信息。
 6、接收到BeforeInsertFilmEvent事件，输出Before Insert Film Data。接收到
 AfterInsertFilmEvent事件，输出After Insert Film Data。
 
-7、程序中使用的title，description 和languageId 需要从环境变量中读取。环境变量配置在dockercompose。接收到信息后，使用mybatis 将用户输入的数据插入表中。
+7、程序中使用的title，description 和languageId 需要从环境变量中读取。环境变量配置在docker-compose。接收到信息后，使用mybatis 将用户输入的数据插入表中。
 
 8、整个过程都需要在事物之下执行。分两个事物，第一次插入手动抛异常，让事物进行回滚。第二次正常插入
 
@@ -43,7 +43,7 @@ Before Insert Film Data
 After Insert Film Data
 Context Stop
 ```
-##### 附加题（5分）
+##### 附加题
 使用Mybatis的插件机制实现统计sql执行时间。并在最后打印出sql实际的执行时间。
 
 
